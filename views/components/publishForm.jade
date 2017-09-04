@@ -1,0 +1,78 @@
+div.container
+    div.row
+        div.col-sm-9
+            div.panel.panel-default
+                div.panel-body
+                    h4
+                        span.fa.fa-newspaper-o.fa-lg
+                        strong(style="margin-left:10px") Publica tu Problema
+                    hr
+                    form(class="form-horizontal", role="form", action="/pub", method="post")
+                        input(type="hidden", name="usingAJAX", value="false")
+                        div.form-group
+                            label(for="inputCategory", class="col-sm-2 control-label") Categoría :
+                            div.col-sm-9
+                                select(class="form-control", id="inputCategory", name="inputCategory", autofocus)
+                                    option(value="celular") Celular 
+                                    option(value="tablet") Tablet
+                                    option(value="laptop") Laptop
+                                    option(value="pc") PC
+                        div.form-group
+                            label(for="inputTitle", class="col-sm-2 control-label") Titulo :
+                            div.col-sm-9
+                                input(type="text", class="form-control", id="inputTitle", name="inputTitle", placeholder="Titulo de tu problema")
+                        div.form-group
+                            label(for="inputContent", class="col-sm-2 control-label") Explica tu problema :
+                            div.col-sm-9
+                                textarea(class="form-control", id="inputContent", name="inputContent", rows="6", placeholder="Cuentanos cual es tu problema", style="resize: none")
+                        div.form-group
+                            label(for="inputBrand", class="col-sm-2 control-label") Marca :
+                            div.col-sm-9
+                                input(type="text", class="form-control", id="inputBrand", name="inputBrand", placeholder="Marca del dispositivo ( Por ejemplo: Samsung )")
+                        div.form-group
+                            label(for="inputModel", class="col-sm-2 control-label") Modelo :
+                            div.col-sm-9
+                                input(type="text", class="form-control", id="inputModel", name="inputModel", placeholder="Modelo del dispositivo ( Por ejemplo: Galaxy S7 )")
+                        hr
+                        h4
+                            span.fa.fa-user.fa-lg
+                            strong(style="margin-left:10px") Información del anunciante
+                        hr
+                        div.form-group
+                            label(for="inputName", class="col-sm-2 control-label") Nombre :
+                            div.col-sm-9
+                                input(type="text", class="form-control", id="inputName", name="inputName", placeholder="Nombre y Apellidos")
+                        div.form-group
+                            label(for="inputEmail", class="col-sm-2 control-label") Email :
+                            div.col-sm-9
+                                input(type="email", class="form-control", id="inputEmail", name="inputEmail", placeholder="Email")
+                        div.form-group
+                            label(for="inputPhone", class="col-sm-2 control-label") Celular :
+                            div.col-sm-9
+                                input(type="tel", class="form-control", id="inputPhone", name="inputPhone", placeholder="Número Celular")
+                        div.form-group
+                            label(for="inputLocation", class="col-sm-2 control-label") Municipio :
+                            div.col-sm-9
+                                input(type="text", class="form-control", id="inputLocation", name="inputLocation", placeholder="Municipio donde vives")
+                        div.form-group
+                            div.col-sm-offset-3.col-sm-6
+                                button(type="submit", id="submitBtn", class="btn btn-block btn-danger") Publicar
+                                
+
+        div.col-sm-3
+            div.row.text-center
+                div.col-sm-12
+                    span.fa.fa-photo.fa-5x
+                    h3 
+                        strong Publica tu Situacion
+                    p Trata de ser lo mas explicito posible para que asi nuestro grupo de trabajo pueda encontrar una solucion a tu problema lo mas pronto posible.
+            div.row
+                div.col-sm-12
+                    div.panel.panel-info
+                        div.panel-heading
+                            h5.text-center
+                                strong  Consejos a la hora de publicar
+                        div.panel-body
+                                    span.fa.fa-check  Se muy preciso explicando tu problema.
+                                    span.fa.fa-check  Deja la mayor cantidad de informacion posible.
+                                    span.fa.fa-check  Trata de no olvidar tu celular pues asi te podremos contactar via sms.

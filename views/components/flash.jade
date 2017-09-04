@@ -1,0 +1,5 @@
+.container
+    each err in errors
+        .alert.alert-danger(role="alert")=err
+    each info in infos
+        .alert.alert-info(role="alert")=info

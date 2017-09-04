@@ -1,0 +1,15 @@
+.container
+    .row
+        .col-md-4.col-md-offset-4
+            h1.text-center Signup Page
+            p.lead.text-center Se uno más de nosotros.
+            br
+            form(role='form', action="/signup", method="post")
+                .form-group
+                    input.form-control(type='text', name="username", placeholder='Enter Username')
+                .form-group
+                    input.form-control(type='password', name="password", placeholder='Password')
+                .form-group
+                    button.btn.btn-default(type='submit') Submit
+                    a(href='/')
+                        button.btn.btn-primary(type="button") Cancel

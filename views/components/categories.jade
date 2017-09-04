@@ -1,0 +1,20 @@
+mixin cat(name,icon)
+    div(class="col-md-3 col-xs-12")
+        h2.centered-text=name
+        div(class="card")
+            span(class="fa fa-#{icon} fa-4x", style="margin-top: 30px")
+        
+
+div(class="container", style="margin-bottom:80px")
+    div(class="well well-sm", style="margin-bottom: 25px")
+        h2(class="text-center")
+            strong CATEGORIAS
+    div(class="row")
+        a(href="/listing?cat=celular&page=1")
+            +cat("Celular", "mobile")
+        a(href="/listing?cat=tablet&page=1")
+            +cat("Tablet", "tablet")
+        a(href="/listing?cat=laptop&page=1")
+            +cat("Laptop", "laptop")
+        a(href="/listing?cat=pc&page=1")
+            +cat("PC", "desktop")

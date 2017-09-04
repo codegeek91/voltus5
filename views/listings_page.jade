@@ -1,0 +1,10 @@
+extends layout
+
+block content
+  -var currentUrl = '/listing'
+  
+  include components/navbar.jade
+  include components/listings.jade
+  include components/footer.jade
+
+  script(src="listing.js")

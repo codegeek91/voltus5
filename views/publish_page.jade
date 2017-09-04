@@ -1,0 +1,13 @@
+extends layout
+
+block styles
+  link(rel='stylesheet', href='sweetalert/sweetalert.css')
+
+block content
+  -var currentUrl = '/pub'
+  
+  include components/navbar.jade
+  include components/publishForm.jade
+  include components/footer.jade
+  script(src="form.js")
+  script(src="sweetalert/sweetalert.min.js")

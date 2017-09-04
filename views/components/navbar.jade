@@ -1,0 +1,59 @@
+// Navbar component
+
+
+//Navbar
+div(class="container")
+    div(class="navbar navbar-default", role="navigation")
+        div(class="container-fluid")
+            div(class="navbar-header")
+                button(type="button", class="navbar-toggle", data-toggle="collapse", data-target=".navbar-collapse")
+                    span(class="sr-only") Toggle Nav
+                    span(class="icon-bar")
+                    span(class="icon-bar")
+                    span(class="icon-bar")
+                a(class="navbar-brand" href="/") 
+                    span(class="fa fa-vimeo fa-lg") oltus 4
+            div(class="navbar-collapse collapse")
+                ul(class="nav navbar-nav navbar-right")
+                    li(class={active: currentUrl === '/'})
+                        a(href="/")
+                            span(class="fa fa-home fa-lg")  Home
+                    li.dropdown(class={active: currentUrl === '/listing'})
+                        a.dropdown-toggle(href="#", data-toggle="dropdown")
+                            span.fa.fa-inbox.fa-lg  Anuncios
+                            span.caret
+                        ul.dropdown-menu(role="menu")
+                            li
+                                a(href="/listing?cat=celular&page=1")
+                                    span.fa.fa-mobile.fa-lg  Celular
+                            li.divider
+                            li
+                                a(href="/listing?cat=tablet&page=1")
+                                    span.fa.fa-tablet.fa-lg  Tablet
+                            li.divider
+                            li
+                                a(href="/listing?cat=laptop&page=1")
+                                    span.fa.fa-laptop.fa-lg  Laptop
+                            li.divider
+                            li
+                                a(href="/listing?cat=pc&page=1")
+                                    span.fa.fa-desktop.fa-lg  PC
+                    li(class={active: currentUrl === '/pub'})
+                        a(href="/pub")
+                            span(class="fa fa-archive fa-lg")  Publicar
+                    if currentUser
+                        li.dropdown
+                            a.dropdown-toggle(href="#", data-toggle="dropdown")
+                                span(class="fa fa-user fa-lg")=' '+ currentUser.username
+                                span.caret
+                            ul.dropdown-menu(role="menu")
+                                li
+                                    a(href="/logout")
+                                        span.fa.fa-sign-out.fa-lg  Logout
+                    else
+                        li(class={active: currentUrl === '/login'})
+                            a(href="/login")
+                                span(class="fa fa-sign-in fa-lg")  Login
+                        li(class={active: currentUrl === '/signup'})
+                            a(href="/signup")
+                                span(class="fa fa-sign-in fa-lg")  Signup

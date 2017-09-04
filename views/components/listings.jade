@@ -1,0 +1,48 @@
+mixin problem(title, content)
+    a.list-group-item(style="margin-bottom: 10px; cursor:pointer")
+        h4.list-group-item-heading
+            span.label.label-primary(style="margin-right: 5px") Samsung
+            span.label.label-info(style="background-color: black") Galaxy S7
+            span.badge(style="float:right") 10/11/1991
+        p.list-group-item-text=title
+            span.label.label-danger(style="float:right") Pend
+        .well(style="display:none")=content
+
+
+-var n = 1
+
+.container
+    div
+        .mini-jumbo
+            h2.centered-text.text-uppercase.animated.bounceInDown
+                strong=category
+            .card-listing.animated.bounceInUp
+                span(class="fa fa-#{icon} fa-4x")
+    if problems.length > 0
+        //el div de abajo se le puede asignar la clase row para tener un panel mas ancho
+        div
+            .panel.panel-primary
+                .panel-body
+                    .list-group
+                        each problem in problems
+                            //cambiar por if !problem.moderatorPending
+                            if problem.moderatorPending
+                                +problem(problem.title, problem.content)
+    else
+        .alert.alert-danger.text-center(role="alert")
+            strong Atención!!! no hay problemas de usuarios en esta categoría, tienes alguno?, pues que esperas dejanos tu problema
+                a.alert-link(href="/pub")  Aqui
+if totalPages > 1
+    .container
+        .row
+            .col-sm-4.col-sm-offset-4(style="text-align:center")
+                ul.pagination.pagination-lg
+                    li
+                        if actualPage-1 != 0
+                            a(href="/listing?cat=#{category}&page=#{actualPage-1}")&laquo;
+                    while n <= totalPages
+                        li(class={active: n==actualPage})
+                            a(href="/listing?cat=#{category}&page=#{n}")=n++
+                    li
+                        if actualPage-totalPages != 0
+                            a(href="/listing?cat=#{category}&page=#{++actualPage}")&raquo;

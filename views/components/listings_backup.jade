@@ -1,0 +1,25 @@
+mixin problem(title)
+    a.list-group-item(href="#", style="margin-bottom: 10px")
+        h4.list-group-item-heading
+            span.label.label-primary(style="margin-right: 5px") Samsung
+            span.label.label-info Galaxy S7
+            span.badge(style="float:right") 10/11/1991
+        p.list-group-item-text=title
+            span.label.label-danger(style="float:right") Pend
+
+- category === 'celular' ? 'mobile' : category
+
+.container
+    div
+        .mini-jumbo
+            h2.centered-text.text-uppercase.animated.bounceInDown
+                strong=category
+            .card-listing.animated.bounceInUp
+                span(class="fa fa-#{icon} fa-4x")
+    //el div de abajo se le puede asignar la clase row para tener un panel mas ancho
+    div
+        .panel.panel-primary
+            .panel-body
+                .list-group
+                    each problem in problems
+                        +problem(problem.title)
