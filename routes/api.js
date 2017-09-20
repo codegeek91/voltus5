@@ -51,50 +51,6 @@ router.post('/sendmail', function(req, res, next) {
     //res.send('respond with a resource');
 });
 
-router.post('/test', upload.array(), function(req, res, next) {
-  console.log(req.body);
-  res.status(200);
-  res.send('email received');
-
-  /*
-    var newProblem = new Problem({
-        category: category,
-        title: title,
-        content: content,
-        brand: brand,
-        model: model,
-        source: 'web',
-        personName: personName,
-        personEmail: personEmail,
-        personPhone: personPhone,
-        personLocation: personLocation
-    });
-
-    var usingAjax = req.body.usingAJAX;
-
-    newProblem.save(function(err){
-        if (err) {
-            console.log(err);
-            if(usingAjax){
-                res.json({success: false});
-            }else{
-                req.flash("error", "Hubo bateo guardando tu problema");
-                res.redirect('/problem'); /// Esta ruta no esta implementada
-            }
-        }else{
-            if(usingAjax){
-                console.log('Using Ajax');
-                res.status(200)
-                res.json({success: true});
-            }else{
-                res.redirect('/');
-            }
-        }
-    });
-*/
-
-});
-
 router.get('/getpending', function(req, res, next){
     Problem
             .find({pending: true})
@@ -110,6 +66,22 @@ router.get('/getpending', function(req, res, next){
 });
 
 router.post('postproblem', function(req, res, next){
+
+    console.log(req.body);
+    res.status(200);
+    res.send('email received');
+
+/*
+    const category = req.body.inputCategory;
+    const title = req.body.inputTitle;
+    const content = req.body.inputContent;
+    const brand = req.body.inputBrand;
+    const model = req.body.inputModel;
+    const personName = req.body.inputName;
+    const personEmail = req.body.inputEmail;
+    const personPhone = req.body.inputPhone;
+    const personLocation = req.body.inputLocation;
+
     var newProblem = new Problem({
         category: category,
         title: title,
@@ -143,7 +115,7 @@ router.post('postproblem', function(req, res, next){
                 res.redirect('/');
             }
         }
-    });
+    });*/
 });
 
 module.exports = router;

@@ -2,15 +2,15 @@ var mongoose = require("mongoose");
 var mongoosePaginate = require('mongoose-paginate');
 
 var problemSchema = mongoose.Schema({
-    category: { type: String, required: true },
-    title: {type: String, required: true},
+    category: { type: String},
+    title: {type: String},
     content: {type: String, required: true},
-    brand: {type: String, required: true},
-    model: {type: String, required: true},
+    brand: {type: String},
+    model: {type: String},
     source: {type: String, required: true},
     personName: { type: String},
     personEmail: { type: String},
-    personPhone: { type: String, required: true},
+    personPhone: { type: String},
     personLocation: { type: String},
     createdAt: { type: Date, default: Date.now },
     pending: { type: Boolean, default: true },
