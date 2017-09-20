@@ -25,9 +25,7 @@ mixin problem(title, content)
                 .panel-body
                     .list-group
                         each problem in problems
-                            //cambiar por if !problem.moderatorPending
-                            if problem.moderatorPending
-                                +problem(problem.title, problem.content)
+                            +problem(problem.title, problem.content)
     else
         .alert.alert-danger.text-center(role="alert")
             strong Atención!!! no hay problemas de usuarios en esta categoría, tienes alguno?, pues que esperas dejanos tu problema

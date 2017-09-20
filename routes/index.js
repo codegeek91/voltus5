@@ -41,15 +41,15 @@ router.post('/pub', function(req, res, next){
 
     console.log(req.body);
 
-    var category = req.body.inputCategory;
-    var title = req.body.inputTitle;
-    var content = req.body.inputContent;
-    var brand = req.body.inputBrand;
-    var model = req.body.inputModel;
-    var personName = req.body.inputName;
-    var personEmail = req.body.inputEmail;
-    var personPhone = req.body.inputPhone;
-    var personLocation = req.body.inputLocation;
+    const category = req.body.inputCategory;
+    const title = req.body.inputTitle;
+    const content = req.body.inputContent;
+    const brand = req.body.inputBrand;
+    const model = req.body.inputModel;
+    const personName = req.body.inputName;
+    const personEmail = req.body.inputEmail;
+    const personPhone = req.body.inputPhone;
+    const personLocation = req.body.inputLocation;
 
     var newProblem = new Problem({
         category: category,
@@ -57,6 +57,7 @@ router.post('/pub', function(req, res, next){
         content: content,
         brand: brand,
         model: model,
+        source: 'web',
         personName: personName,
         personEmail: personEmail,
         personPhone: personPhone,
@@ -69,7 +70,7 @@ router.post('/pub', function(req, res, next){
         if (err) {
             console.log(err);
             if(usingAjax){
-                res.json({success: false})
+                res.json({success: false});
             }else{
                 req.flash("error", "Hubo bateo guardando tu problema");
                 res.redirect('/problem'); /// Esta ruta no esta implementada
@@ -129,43 +130,6 @@ router.get("/logout", function(req, res) {
     res.redirect("/");
 });
 
-/*
-router.get('/listing', function(req, res, next){
-    var category = req.query.cat;
-    var actualPage = req.query.page
-    var listingsPerPage = 10;
-    console.log(req.query);
-    if(category && (category == "celular" || category == "tablet" || category == "laptop" || category == "pc")){
-        Problem.find({category: category})
-            .sort('-createdAt')
-            .limit(listingsPerPage)
-            .skip(listingsPerPage * (actualPage-1) )
-            .exec(function(err, problems){
-                if(err){return next(err)}
-                var maxPages = Math.ceil(problems.length / listingsPerPage);
-
-                if(actualPage == 0 || actualPage > maxPages){console.log(problems.length);return next()}//mejor crear una pagina 404 o darle estilo a error.jade
-                console.log(problems);
-                
-
-                //// Formando el icon para el icono de la vista
-                var icon;
-                if(category == 'celular'){
-                    icon = 'mobile';
-                }else if(category == 'pc'){
-                    icon = 'desktop';
-                }else{
-                    icon = category;
-                }
-
-                res.render('listings_page', {category: category, icon: icon, problems: problems, page:actualPage, totalPages:maxPages});
-            });
-        
-    }else{
-        next()
-    }
-});*/
-
 router.get('/listing', function(req, res, next){
     var category = req.query.cat;
     var actualPage = req.query.page
@@ -181,7 +145,7 @@ router.get('/listing', function(req, res, next){
         }else{
             icon = category;
         }
-        var query = {category: category};
+        var query = {category: category, pending: false};
         var options = {
         select: '-personName -personPhone -personEmail -personLocation',
         sort: '-createdAt',
