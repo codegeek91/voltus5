@@ -3,7 +3,7 @@ var router = express.Router();
 var multer  = require('multer');
 var upload = multer();
 const sgMail = require('@sendgrid/mail');
-sgMail.setApiKey('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');
+sgMail.setApiKey('api key here');
 
 var Problem = require("../models/problem");
 
