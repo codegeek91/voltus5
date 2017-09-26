@@ -14,7 +14,8 @@ var problemSchema = mongoose.Schema({
     personLocation: { type: String},
     createdAt: { type: Date, default: Date.now },
     pending: { type: Boolean, default: true },
-    moderatorPending: {type: Boolean, default: true}
+    moderatorPending: {type: Boolean, default: true},
+    downloadPending: {type: Boolean}
 });
 
 problemSchema.plugin(mongoosePaginate);
