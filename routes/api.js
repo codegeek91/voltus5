@@ -112,9 +112,9 @@ router.put('/update_problem_downloadpending_status/:problem_id', function(req, r
         Problem.findById(req.params.problem_id, function(err, doc){
             //console.log('>>>>>>>>>>>>>>'+ doc);
             if (err) return res.status(500).json(err);
-            res.status(200).json({success: true});
+            //res.status(200).json({success: true});
             doc.downloadPending = false;
-            doc.save();
+            doc.save(function(){res.status(200).json({success: true});}); //este cambio no esta bien testeado, poner el response de callback de la salva en bd
         });
     }
     

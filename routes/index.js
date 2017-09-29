@@ -61,7 +61,8 @@ router.post('/pub', function(req, res, next){
         personName: personName,
         personEmail: personEmail,
         personPhone: personPhone,
-        personLocation: personLocation
+        personLocation: personLocation,
+        downloadPending: true
     });
 
     var usingAjax = req.body.usingAJAX;
