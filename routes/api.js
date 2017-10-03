@@ -140,6 +140,7 @@ router.post('/post_problem', function(req, res, next){
 
 router.post('/sendgrid_post_problem', upload.array(), function(req, res, next){
 
+    console.log(req.body);
     //Comprobacion para saber si es un mail
     if(req.body.to == 'talleres@voltus4.com'){
         
