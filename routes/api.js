@@ -170,7 +170,8 @@ router.post('/sendgrid_post_problem', upload.array(), function(req, res, next){
     }*/
 
     
-    console.log(req.body);
+    //console.log(req.body);
+    console.log('From: >>>>>>  '+ req.body.from);
     res.status(200);
     res.send('email received');
     
