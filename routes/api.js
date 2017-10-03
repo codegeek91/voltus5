@@ -4,7 +4,7 @@ var multer  = require('multer');
 var upload = multer();
 const sgMail = require('@sendgrid/mail');
 var fs = require('fs');
-//var apikey = fs.readFileSync('sendgridkey.txt', 'utf8');
+var apikey = fs.readFileSync('sendgridkey.txt', 'utf8');
 //console.log(apikey);
 sgMail.setApiKey('api key here');
 
