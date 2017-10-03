@@ -141,8 +141,11 @@ router.post('/post_problem', function(req, res, next){
 router.post('/sendgrid_post_problem', upload.array(), function(req, res, next){
 
     //Comprobacion para saber si es un mail
-    if(req.body.to == 'trabajos@voltus4.com'){
-        const title = req.body.subject;
+    if(req.body.to == 'talleres@voltus4.com'){
+        
+        console.log(req.body);
+
+        /*const title = req.body.subject;
         const content = req.body.text;
         const personEmail = req.body.from;
 
@@ -159,7 +162,7 @@ router.post('/sendgrid_post_problem', upload.array(), function(req, res, next){
             }else{
                 return res.status(200).send('success');
             }
-        });
+        });*/
     }
 
     /*
