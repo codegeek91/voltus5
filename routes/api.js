@@ -140,24 +140,24 @@ router.post('/post_problem', function(req, res, next){
 
 router.post('/sendgrid_post_problem', upload.array(), function(req, res, next){
 
-    //console.log(req.body);
-    //Comprobacion para saber si es un mail
+    var envelope = JSON.parse(req.body.envelope)
+    var subject = req.body.subject;
+    var text = req.body.text;
+    /*
+    console.log('**Incoming Email**');
+    console.log('From: '+ envelope.from);
+    console.log('To: '+ envelope.to);
+    console.log('Subject: ' + subject);
+    console.log('Text: ' + text);
+    */
     
-    /*if(req.body.from == 'talleres@voltus5.com'){
-        
-        console.log(req.body);
-        res.status(200);
-        res.send('email received');
-
-        const title = req.body.subject;
-        const content = req.body.text;
-        const personEmail = req.body.from;
+    if(envelope.to == 'contacto@voltus5.com'){
 
         var newProblem = new Problem({
-            title: title,
-            content: content,
+            title: subject,
+            content: text,
             source: 'email',
-            personEmail: personEmail
+            personEmail: envelope.from
         });
 
         newProblem.save(function(err){
@@ -167,23 +167,16 @@ router.post('/sendgrid_post_problem', upload.array(), function(req, res, next){
                 return res.status(200).send('success');
             }
         });
-    }*/
+    }else if(envelope.to == 'talleres@voltus5.com'){
+        console.log('**Incoming Email**');
+        console.log('From: '+ envelope.from);
+        console.log('To: '+ envelope.to);
+        console.log('Subject: ' + subject);
+        console.log('Text: ' + text);
+        return res.status(200).send('success');
+    }
 
-    
-    //console.log(req.body);
-    var envelope = JSON.parse(req.body.envelope)
-    var subject = req.body.subject;
-    var text = req.body.text;
-    console.log('**Incoming Email**');
-    console.log('From: >>>>>>  '+ envelope.from);
-    console.log('To: >>>>>>  '+ envelope.to);
-    console.log('Subject: ' + subject);
-    console.log('Text: ' + text);
-    //console.log(req.body);
-    res.status(200);
-    res.send('email received');
-    
-    
+    return res.status(200).send('success');
 });
 
 
