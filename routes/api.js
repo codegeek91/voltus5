@@ -13,6 +13,7 @@ var cors = require('cors');
 router.use(cors());
 
 var Problem = require("../models/problem");
+var Solution = require("../models/solution");
 
 router.get('/check_connection', function(){
     res.status(200).send('success');
@@ -78,6 +79,62 @@ router.post('/sendmail', function(req, res, next) {
     //res.send('respond with a resource');
 });
 
+/////Talleres Solutions Routes/////////
+
+router.get('/download_pending_solutions_ids', function(req, res, next){
+    Solution
+        .find({downloadPending: true})
+        .select('_id')
+        .exec(function(err,result){
+            if(err){
+                console.log(err);
+                res.status(500).json({error: error});
+            }else{
+                //console.log(result);
+                res.status(200).json(result);
+            }
+        });
+});
+
+router.get('/download_pending_solution_by_id/:solution_id', function(req, res, next){
+    const id = req.params.solution_id;
+    if(id){
+        Solution
+            .findOne({pending: true, _id: id})
+            .select('-downloadPending')
+            .exec(function(err,doc){
+                if(err){
+                    console.log(err);
+                    res.status(500).json(error);
+                }else{
+                    //console.log(doc);
+                    res.status(200).json(doc);
+                    //doc.downloadPending = true;
+                    //doc.save();
+                }
+            });
+    }
+    
+});
+
+router.put('/update_solution_downloadpending_status/:solution_id;', function(req, res, next){
+    const id = req.params.solution_id;
+    if(id){
+        Solution.findById(id, function(err, doc){
+            //console.log('>>>>>>>>>>>>>>'+ doc);
+            if (err) return res.status(500).json(err);
+            //res.status(200).json({success: true});
+            doc.downloadPending = false;
+            doc.save(function(){res.status(200).json({success: true});});
+        });
+    }
+    res.status(500).send('error');
+});
+
+
+/////Talleres Solutions Routes End/////////
+
+/*
 router.get('/getpending', function(req, res, next){
     Problem
             .find({pending: true})
@@ -90,7 +147,7 @@ router.get('/getpending', function(req, res, next){
                     res.status(201).json({problems: result})
                 }
             });
-});
+});*/
 
 router.get('/download_pending_ids', function(req, res, next){
     Problem
@@ -131,7 +188,7 @@ router.get('/download_pending_problem_by_id/:problem_id', function(req, res, nex
 router.put('/update_problem_downloadpending_status/:problem_id', function(req, res, next){
     const id = req.params.problem_id;
     if(id){
-        Problem.findById(req.params.problem_id, function(err, doc){
+        Problem.findById(id, function(err, doc){
             //console.log('>>>>>>>>>>>>>>'+ doc);
             if (err) return res.status(500).json(err);
             //res.status(200).json({success: true});
@@ -139,7 +196,7 @@ router.put('/update_problem_downloadpending_status/:problem_id', function(req, r
             doc.save(function(){res.status(200).json({success: true});}); //este cambio no esta bien testeado, poner el response de callback de la salva en bd
         });
     }
-    
+    res.status(500).send('error');
 });
 
 router.post('/post_problem', function(req, res, next){
