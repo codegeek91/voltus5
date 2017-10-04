@@ -179,7 +179,7 @@ router.post('/sendgrid_post_problem', upload.array(), function(req, res, next){
     console.log('To: >>>>>>  '+ envelope.to);
     console.log('Subject: ', + subject);
     console.log('Text: ' + text);
-    //console.log(req.body);
+    console.log(req.body);
     res.status(200);
     res.send('email received');
     
