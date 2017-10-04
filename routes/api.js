@@ -7,7 +7,7 @@ var fs = require('fs');
 var path = require('path');
 var apikey = fs.readFileSync(path.join(__dirname, '../sendgridkey.txt'), 'utf8');
 console.log(apikey);
-sgMail.setApiKey('api key here');
+sgMail.setApiKey(apikey);
 
 var cors = require('cors');
 router.use(cors());
@@ -17,6 +17,27 @@ var Problem = require("../models/problem");
 router.get('/check_connection', function(){
     res.status(200).send('success');
 })
+
+var sendMail = function(to,sender,subject,text){
+    const msg = {
+        to: to,
+        from: sender,
+        subject: subject,
+        text: text,
+    };
+
+    sgMail.sendMultiple(msg, function(error, result) {
+        if(error){
+            const {message, code, response} = error;
+            res.status(500);
+            res.json({success: false, error: message});
+            //console.error(message);
+        }else{
+            res.status(200);
+            res.json({success: true});
+        }
+    });
+};
 
 router.post('/sendmail', function(req, res, next) {
     /* Post Data: from, to, subject, text */
