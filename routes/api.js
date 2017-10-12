@@ -259,9 +259,10 @@ router.post('/sendgrid_post_problem', upload.array(), function(req, res, next){
                 if(err){
                     console.log(err);
                 }else if(doc){
+                    console.log('akakak');
                     console.log(doc);
                     tallerName = doc.name;
-                    doc.responses = doc.responses + 1;
+                    doc.responses = 1;
                     doc.save();
                     Solution.create({from: envelope.from, tallerName: tallerName, subject: subject, text: text}, function(err, solution){
                         if(err){
