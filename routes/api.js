@@ -285,9 +285,9 @@ router.post('/sendgrid_post_problem', upload.array(), function(req, res, next){
         console.log('Subject: ' + subject);
         console.log('Text: ' + text);
         return res.status(200).send('success');
+    }else{
+        return res.status(200).send('success');
     }
-
-    return res.status(200).send('success');
 });
 
 router.get('/testsolution', function(req, res, next){
