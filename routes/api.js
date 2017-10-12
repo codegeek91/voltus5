@@ -254,7 +254,7 @@ router.post('/sendgrid_post_problem', upload.array(), function(req, res, next){
         var tallerName;
 
         Taller
-            .find({email: envelope.from})
+            .findOne({email: envelope.from})
             .exec(function(err,doc){
                 if(err){
                     console.log(err);
