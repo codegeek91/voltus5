@@ -278,13 +278,6 @@ router.post('/sendgrid_post_problem', upload.array(), function(req, res, next){
                     return res.status(200).send('unknow taller');
                 }
             });
-
-        console.log('**Incoming Email**');
-        console.log('From: '+ envelope.from);
-        console.log('To: '+ envelope.to);
-        console.log('Subject: ' + subject);
-        console.log('Text: ' + text);
-        return res.status(200).send('success');
     }else{
         return res.status(200).send('success');
     }
