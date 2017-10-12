@@ -177,8 +177,14 @@ router.get('/test', function(req, res){
     }
 });
 
+/*
+router.get('insert_taller', function(req,res){
 
+});
 
-
+router.post('insert_taller', function(req,res){
+    
+});
+*/
 
 module.exports = router;

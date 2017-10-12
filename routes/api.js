@@ -14,6 +14,7 @@ router.use(cors());
 
 var Problem = require("../models/problem");
 var Solution = require("../models/solution");
+var Taller = require("../models/taller");
 
 router.get('/check_connection', function(){
     res.status(200).send('success');
@@ -79,7 +80,7 @@ router.post('/sendmail', function(req, res, next) {
     //res.send('respond with a resource');
 });
 
-/////Talleres Solutions Routes/////////
+/////////////////  Talleres Solutions Routes  /////////////////////////
 
 router.get('/download_pending_solutions_ids', function(req, res, next){
     Solution
@@ -100,7 +101,7 @@ router.get('/download_pending_solution_by_id/:solution_id', function(req, res, n
     const id = req.params.solution_id;
     if(id){
         Solution
-            .findOne({pending: true, _id: id})
+            .findOne({_id: id})
             .select('-downloadPending')
             .exec(function(err,doc){
                 if(err){
@@ -117,7 +118,8 @@ router.get('/download_pending_solution_by_id/:solution_id', function(req, res, n
     
 });
 
-router.put('/update_solution_downloadpending_status/:solution_id;', function(req, res, next){
+router.put('/update_solution_downloadpending_status/:solution_id', function(req, res, next){
+    console.log('yijaaa')
     const id = req.params.solution_id;
     if(id){
         Solution.findById(id, function(err, doc){
@@ -127,12 +129,12 @@ router.put('/update_solution_downloadpending_status/:solution_id;', function(req
             doc.downloadPending = false;
             doc.save(function(){res.status(200).json({success: true});});
         });
-    }
-    res.status(500).send('error');
+    }else{res.status(500).send('error');}
+    
 });
 
 
-/////Talleres Solutions Routes End/////////
+//////////////////  Talleres Solutions Routes End   ///////////////////////////
 
 /*
 router.get('/getpending', function(req, res, next){
@@ -195,8 +197,8 @@ router.put('/update_problem_downloadpending_status/:problem_id', function(req, r
             doc.downloadPending = false;
             doc.save(function(){res.status(200).json({success: true});}); //este cambio no esta bien testeado, poner el response de callback de la salva en bd
         });
-    }
-    res.status(500).send('error');
+    }else{res.status(500).send('error');}
+    
 });
 
 router.post('/post_problem', function(req, res, next){
@@ -206,14 +208,17 @@ router.post('/post_problem', function(req, res, next){
         Problem.create(problem, function(err,doc){
             if(err){
                 console.error(err);
-                res.status(500).json({succes:false, reason:err});
+               return res.status(500).json({succes:false, reason:err});
             }
             else{
                 console.log('Problem Created By Upload');
-                res.status(201).json({succes:true});
+               return res.status(201).json({succes:true});
             }
         });
+    }else{
+        res.status(401).json({succes:false});
     }
+    
 });
 
 router.post('/sendgrid_post_problem', upload.array(), function(req, res, next){
@@ -246,6 +251,32 @@ router.post('/sendgrid_post_problem', upload.array(), function(req, res, next){
             }
         });
     }else if(envelope.to == 'talleres@voltus5.com'){
+        var tallerName;
+
+        Taller
+            .find({email: envelope.from})
+            .exec(function(err,doc){
+                if(err){
+                    console.log(err);
+                }else if(doc){
+                    tallerName = doc.name;
+                    doc.responses = doc.responses + 1;
+                    doc.save();
+                    Solution.create({from: envelope.from, tallerName: tallerName, subject: subject, text: text}, function(err, solution){
+                        if(err){
+                            console.error(err);
+                            res.status(500).send('failure');
+                        }
+                        else{
+                            console.log('Solution Created By Email');
+                            res.status(201).send('success');;
+                        }
+                    })
+                }else{
+                    return res.status(200).send('unknow taller');
+                }
+            });
+
         console.log('**Incoming Email**');
         console.log('From: '+ envelope.from);
         console.log('To: '+ envelope.to);
@@ -255,6 +286,38 @@ router.post('/sendgrid_post_problem', upload.array(), function(req, res, next){
     }
 
     return res.status(200).send('success');
+});
+
+router.get('/testsolution', function(req, res, next){
+    Solution.create({}, function(err,doc){
+        if(err){
+            console.error(err);
+            res.status(500).json({succes:false, reason:err});
+        }
+        else{
+            console.log('Solution Created By Test');
+            res.status(201).json({succes:true});
+        }
+    });
+});
+
+router.post('/post_taller', function(req,res,next){
+    var taller = req.body;
+    if(taller){
+        Taller.create(taller, function(err,doc){
+            if(err){
+                console.error(err);
+               return res.status(500).json({succes:false, reason:err});
+            }
+            else{
+                console.log('Taller Created By Upload');
+               return res.status(201).json({succes:true});
+            }
+        });
+    }else{
+        res.status(401).json({succes:false});
+    }
+    
 });
 
 
