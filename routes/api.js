@@ -29,7 +29,7 @@ var sendMail = function(to,sender,subject,text){
         text: text,
     };
 
-    sgMail.sendMultiple(msg, function(error, result) {
+    sgMail.send(msg, function(error, result) {
         if(error){
             const {message, code, response} = error;
             console.log('ERROR');
