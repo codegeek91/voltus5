@@ -262,7 +262,7 @@ router.post('/sendgrid_post_problem', upload.array(), function(req, res, next){
                     console.log('akakak');
                     console.log(doc);
                     tallerName = doc.name;
-                    doc.responses = 1;
+                    doc.responses = doc.responses + 1;
                     doc.save();
                     Solution.create({from: envelope.from, tallerName: tallerName, subject: subject, text: text}, function(err, solution){
                         if(err){
@@ -279,7 +279,7 @@ router.post('/sendgrid_post_problem', upload.array(), function(req, res, next){
                 }
             });
     }else{
-        return res.status(200).send('success');
+        return res.status(200).send('unknow to');
     }
 });
 
