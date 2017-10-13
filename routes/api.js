@@ -21,6 +21,7 @@ router.get('/check_connection', function(){
 })
 
 var sendMail = function(to,sender,subject,text){
+    console.log('function invocation');
     const msg = {
         to: to,
         from: sender,
