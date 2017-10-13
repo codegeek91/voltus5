@@ -34,7 +34,7 @@ var sendMail = function(to,sender,subject,text){
             const {message, code, response} = error;
             console.log('ERROR');
             console.log(code);
-            return console.error(message);
+            return console.error(error);
         }else{
             return console.log('sended email');
         }
