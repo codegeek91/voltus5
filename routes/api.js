@@ -6,7 +6,7 @@ const sgMail = require('@sendgrid/mail');
 var fs = require('fs');
 var path = require('path');
 var apikey = fs.readFileSync(path.join(__dirname, '../sendgridkey.txt'), 'utf8');
-console.log(apikey);
+console.log(apikey.trim());
 sgMail.setApiKey(apikey);
 
 var cors = require('cors');
