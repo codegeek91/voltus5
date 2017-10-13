@@ -31,18 +31,14 @@ var sendMail = function(to,sender,subject,text){
     sgMail.sendMultiple(msg, function(error, result) {
         if(error){
             const {message, code, response} = error;
-            res.status(500);
-            res.json({success: false, error: message});
-            //console.error(message);
+            return console.error(message);
         }else{
-            res.status(200);
-            res.json({success: true});
+            return console.log('sended email');
         }
     });
 };
-
+/*
 router.post('/sendmail', function(req, res, next) {
-    /* Post Data: from, to, subject, text */
     const key = req.body.key;
     const sender = req.body.from;
     const receiver = req.body.to;
@@ -78,7 +74,7 @@ router.post('/sendmail', function(req, res, next) {
     }
 
     //res.send('respond with a resource');
-});
+});*/
 
 /////////////////  Talleres Solutions Routes  /////////////////////////
 
@@ -212,6 +208,7 @@ router.post('/post_problem', function(req, res, next){
             }
             else{
                 console.log('Problem Created By Upload');
+                sendMail(['codegeek1991@gmail.com'], 'prueba@voltus5.com', 'subject id', 'aaaaaaaaaaaaaa');
                return res.status(201).json({succes:true});
             }
         });
@@ -275,6 +272,7 @@ router.post('/sendgrid_post_problem', upload.array(), function(req, res, next){
                         }
                     })
                 }else{
+                    console.log('unknow taller');
                     return res.status(200).send('unknow taller');
                 }
             });
