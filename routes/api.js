@@ -20,7 +20,7 @@ router.get('/check_connection', function(){
     res.status(200).send('success');
 })
 
-var sendMail = function(to,sender,subject,text){
+var sendMail = function(to,sender,subject,text,sgMail){
     console.log('function invocation');
     const msg = {
         to: to,
@@ -211,7 +211,7 @@ router.post('/post_problem', function(req, res, next){
             }
             else{
                 console.log('Problem Created By Upload');
-                sendMail('codegeek1991@gmail.com', 'prueba@voltus5.com', 'subject id', 'aaaaaaaaaaaaaa');
+                sendMail('codegeek1991@gmail.com', 'prueba@voltus5.com', 'subject id', 'aaaaaaaaaaaaaa', sgMail);
                return res.status(201).json({succes:true});
             }
         });
