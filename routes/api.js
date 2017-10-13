@@ -211,7 +211,7 @@ router.post('/post_problem', function(req, res, next){
             }
             else{
                 console.log('Problem Created By Upload');
-                sendMail('codegeek1991@gmail.com', 'prueba@voltus5.com', 'subject id', 'aaaaaaaaaaaaaa');
+                sendMail('codegeek1991@gmail.com', 'prueba@voltus5.com', doc._id, 'cojone pincha');
                return res.status(201).json({succes:true});
             }
         });
