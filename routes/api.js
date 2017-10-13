@@ -33,7 +33,7 @@ var sendMail = function(to,sender,subject,text){
         if(error){
             const {message, code, response} = error;
             console.log('ERROR');
-            console.log(response);
+            console.log(code);
             return console.error(message);
         }else{
             return console.log('sended email');
