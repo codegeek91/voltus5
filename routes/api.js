@@ -32,6 +32,8 @@ var sendMail = function(to,sender,subject,text){
     sgMail.sendMultiple(msg, function(error, result) {
         if(error){
             const {message, code, response} = error;
+            console.log('ERROR');
+            console.log(response);
             return console.error(message);
         }else{
             return console.log('sended email');
