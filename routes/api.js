@@ -211,8 +211,14 @@ router.post('/post_problem', function(req, res, next){
             }
             else{
                 console.log('Problem Created By Upload');
-                sendMail('codegeek1991@gmail.com', 'prueba@voltus5.com', doc._id, 'cojone pincha');
-               return res.status(201).json({succes:true});
+                Taller
+                    .find()
+                    .select('email')
+                    .exec(function(err, emails){
+                        console.log(emails);
+                    });
+                //sendMail('codegeek1991@gmail.com', 'prueba@voltus5.com', doc._id, doc.title);
+                return res.status(201).json({succes:true});
             }
         });
     }else{
