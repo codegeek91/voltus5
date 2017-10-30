@@ -155,7 +155,7 @@ router.get('/listing', function(req, res, next){
         };
 
         Problem.paginate(query, options).then(function(problems) {
-            console.log(actualPage);
+            console.log(problems);
             if(actualPage > problems.pages){return next()}
             res.render('listings_page', {category: category, icon: icon, problems: problems.docs, actualPage:actualPage, totalPages:problems.pages});
         });
