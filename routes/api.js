@@ -240,7 +240,7 @@ var testFun = function(index, array, emailList, problem){
         return res.status(201).json({succes:true});
     }
     emailList.push(array[index].email);
-    testFun(index + 1, array, emailList);
+    testFun(index + 1, array, emailList, problem);
 };
 
 router.post('/sendgrid_post_problem', upload.array(), function(req, res, next){
