@@ -220,7 +220,7 @@ router.post('/post_problem', function(req, res, next){
                             return res.status(500).json({succes:false, reason:err});
                         }else{
                             //console.log(emails);
-                            testFun(0, emails, []);
+                            testFun(0, emails, [], doc);
                         }   
                     });
                 //sendMail('codegeek1991@gmail.com', 'prueba@voltus5.com', doc._id, doc.title);
@@ -233,10 +233,10 @@ router.post('/post_problem', function(req, res, next){
     
 });
 
-var testFun = function(index, array, emailList){
+var testFun = function(index, array, emailList, problem){
     if (index >= array.length){
         console.log(emailList);
-        sendMail(emailList, 'prueba@voltus5.com', doc._id, doc.title);
+        sendMail(emailList, 'prueba@voltus5.com', problem._id, problem.title);
         return res.status(201).json({succes:true});
     }
     emailList.push(array[index].email);
