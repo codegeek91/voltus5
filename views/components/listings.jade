@@ -37,10 +37,10 @@ if totalPages > 1
                 ul.pagination.pagination-lg
                     li
                         if actualPage-1 != 0
-                            a(href="/listing?cat=#{category}&page=#{actualPage-1}")&laquo;
+                            a(href="/listing?cat=#{category}&page=#{actualPage-1}") &laquo;
                     while n <= totalPages
                         li(class={active: n==actualPage})
                             a(href="/listing?cat=#{category}&page=#{n}")=n++
                     li
                         if actualPage-totalPages != 0
-                            a(href="/listing?cat=#{category}&page=#{++actualPage}")&raquo;
+                            a(href="/listing?cat=#{category}&page=#{++actualPage}") &raquo;
