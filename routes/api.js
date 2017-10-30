@@ -29,7 +29,7 @@ var sendMail = function(to,sender,subject,text){
         text: text,
     };
 
-    sgMail.send(msg, function(error, result) {
+    sgMail.sendMultiple(msg, function(error, result) {
         if(error){
             const {message, code, response} = error;
             console.log('ERROR');
@@ -224,7 +224,7 @@ router.post('/post_problem', function(req, res, next){
                         }   
                     });
                 //sendMail('codegeek1991@gmail.com', 'prueba@voltus5.com', doc._id, doc.title);
-                return res.status(201).json({succes:true});
+                //return res.status(201).json({succes:true});
             }
         });
     }else{
@@ -236,7 +236,8 @@ router.post('/post_problem', function(req, res, next){
 var testFun = function(index, array, emailList){
     if (index >= array.length){
         return console.log(emailList);
-        //return sendMail(emailList, 'prueba@voltus5.com', doc._id, doc.title);
+        sendMail(emailList, 'prueba@voltus5.com', doc._id, doc.title);
+        return res.status(201).json({succes:true});
     }
     emailList.push(array[index].email);
     testFun(index + 1, array, emailList);
