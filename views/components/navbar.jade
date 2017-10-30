@@ -15,12 +15,12 @@ div(class="container")
                     span(class="fa fa-vimeo fa-lg") oltus 4
             div(class="navbar-collapse collapse")
                 ul(class="nav navbar-nav navbar-right")
-                    li(class={active: currentUrl === '/'})
-                        a(href="/")
-                            span(class="fa fa-home fa-lg")  Home
+                    li(class={active: currentUrl === '/pub'})
+                        a(href="/pub")
+                            span(class="fa fa-plus fa-lg")  Insertar
                     li.dropdown(class={active: currentUrl === '/listing'})
                         a.dropdown-toggle(href="#", data-toggle="dropdown")
-                            span.fa.fa-inbox.fa-lg  Anuncios
+                            span.fa.fa-inbox.fa-lg  Problemas
                             span.caret
                         ul.dropdown-menu(role="menu")
                             li
@@ -38,9 +38,7 @@ div(class="container")
                             li
                                 a(href="/listing?cat=pc&page=1")
                                     span.fa.fa-desktop.fa-lg  PC
-                    li(class={active: currentUrl === '/pub'})
-                        a(href="/pub")
-                            span(class="fa fa-archive fa-lg")  Publicar
+//               
                     if currentUser
                         li.dropdown
                             a.dropdown-toggle(href="#", data-toggle="dropdown")

@@ -6,9 +6,8 @@ mixin cat(name,icon)
         
 
 div(class="container", style="margin-bottom:80px")
-    div(class="well well-sm", style="margin-bottom: 25px")
-        h2(class="text-center")
-            strong CATEGORIAS
+    h2(class="text-center", style="margin-bottom:40px")
+        strong CATEGORIAS
     div(class="row")
         a(href="/listing?cat=celular&page=1")
             +cat("Celular", "mobile")

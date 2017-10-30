@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 
 module.exports = function(){
 
-    var dbURI = 'mongodb://localhost/voltus4';
+    var dbURI = 'mongodb://localhost/voltus5';
     mongoose.connect(dbURI);
     var db = mongoose.connection;
 
