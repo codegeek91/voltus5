@@ -235,7 +235,7 @@ router.post('/post_problem', function(req, res, next){
 
 var testFun = function(index, array, emailList){
     if (index >= array.length){
-        return console.log(emailList);
+        console.log(emailList);
         sendMail(emailList, 'prueba@voltus5.com', doc._id, doc.title);
         return res.status(201).json({succes:true});
     }
