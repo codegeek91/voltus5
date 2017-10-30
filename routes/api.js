@@ -201,6 +201,7 @@ router.put('/update_problem_downloadpending_status/:problem_id', function(req, r
 });
 
 router.post('/post_problem', function(req, res, next){
+    var emailList = [];
     const problem = req.body;
     console.log('Incoming Uploaded Problem:  ' + problem);
     if(problem){
@@ -215,7 +216,12 @@ router.post('/post_problem', function(req, res, next){
                     .find()
                     .select('email')
                     .exec(function(err, emails){
-                        console.log(emails);
+                        if(err){
+                            return res.status(500).json({succes:false, reason:err});
+                        }else{
+                            //console.log(emails);
+                            testFun(0, emails, []);
+                        }   
                     });
                 //sendMail('codegeek1991@gmail.com', 'prueba@voltus5.com', doc._id, doc.title);
                 return res.status(201).json({succes:true});
@@ -226,6 +232,15 @@ router.post('/post_problem', function(req, res, next){
     }
     
 });
+
+var testFun = function(index, array, emailList){
+    if (index >= array.length){
+        console.log(emailList)
+        //return sendMail(emailList, 'prueba@voltus5.com', doc._id, doc.title);
+    }
+    emailList.push(array[index]);
+    testFun(index + 1, array, emailList);
+};
 
 router.post('/sendgrid_post_problem', upload.array(), function(req, res, next){
 
