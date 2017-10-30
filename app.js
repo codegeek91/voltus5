@@ -27,7 +27,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 //====================================== DB init
-var dbURI = 'mongodb://localhost/voltus4';
+var dbURI = 'mongodb://localhost/voltus5';
 mongoose.connect(dbURI);
 var db = mongoose.connection;
 
