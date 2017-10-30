@@ -146,7 +146,7 @@ router.get('/listing', function(req, res, next){
         }else{
             icon = category;
         }
-        var query = {category: category, pending: false};
+        var query = {category: category, pending: true};
         var options = {
         select: '-personName -personPhone -personEmail -personLocation',
         sort: '-createdAt',
