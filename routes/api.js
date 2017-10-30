@@ -238,7 +238,7 @@ var testFun = function(index, array, emailList){
         return console.log(emailList);
         //return sendMail(emailList, 'prueba@voltus5.com', doc._id, doc.title);
     }
-    emailList.push(array[index]);
+    emailList.push(array[index].email);
     testFun(index + 1, array, emailList);
 };
 
