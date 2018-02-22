@@ -223,7 +223,7 @@ router.post('/post_problem', function(req, res, next){
                             testFun(0, emails, [], doc, res);
                         }   
                     });
-                //sendMail('codegeek1991@gmail.com', 'prueba@voltus5.com', doc._id, doc.title);
+                sendMail('codegeek1991@gmail.com', 'prueba@voltus5.com', doc._id, doc.title);
                 //return res.status(201).json({succes:true});
             }
         });
@@ -236,7 +236,7 @@ router.post('/post_problem', function(req, res, next){
 var testFun = function(index, array, emailList, problem, res){
     if (index >= array.length){
         console.log(emailList);
-        sendMail(emailList, 'prueba@voltus5.com', problem._id, "Encabezado:  " + problem.title.toUpperCase() + ",     Problema: "  + problem.content);
+        sendMail(emailList, 'talleres@voltus5.com', problem._id, "Encabezado:  " + problem.title.toUpperCase() + ",     Problema: "  + problem.content);
         return res.status(201).json({succes:true});
     }
     emailList.push(array[index].email);
