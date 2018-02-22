@@ -1,8 +1,8 @@
-mixin problem(title, content)
+mixin problem(title, content, brand, model)
     a.list-group-item(style="margin-bottom: 10px; cursor:pointer")
         h4.list-group-item-heading
-            span.label.label-primary(style="margin-right: 5px") Samsung
-            span.label.label-info(style="background-color: black") Galaxy S7
+            span.label.label-primary(style="margin-right: 5px")=brand
+            span.label.label-info(style="background-color: black")=model
             span.badge(style="float:right") 10/11/1991
         p.list-group-item-text=title
             span.label.label-danger(style="float:right") Pend
@@ -25,7 +25,7 @@ mixin problem(title, content)
                 .panel-body
                     .list-group
                         each problem in problems
-                            +problem(problem.title, problem.content)
+                            +problem(problem.title, problem.content, problem.brand, problem.model)
     else
         .alert.alert-danger.text-center(role="alert")
             strong Atención!!! no hay problemas de usuarios en esta categoría, tienes alguno?, pues que esperas dejanos tu problema
